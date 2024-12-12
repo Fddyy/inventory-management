@@ -4,7 +4,7 @@ const getAllTransaksi = async (req,res) => {
 
   const dataTransaksi = await getTransaksi();
 
-    res.render('pages/Transaksi',
+    res.render('pages/Transaksi.ejs',
       { dataTransaksi , title:'Laporan Taransaksi'})
 };
 

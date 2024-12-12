@@ -21,7 +21,7 @@ const dashboardController = async (req,res) => {
         values: barangMasuk.map(item => item.total_barang),
     };
 
-    res.render('pages/dashboard', { message,daftarBarang,jumlahData,pertumbuhanBarang, getUser,chartData1,chartData2 ,title:"LA Dashboard"});
+    res.render('pages/Dashboard.ejs', { message,daftarBarang,jumlahData,pertumbuhanBarang, getUser,chartData1,chartData2 ,title:"LA Dashboard"});
 };
 
 module.exports = dashboardController;
