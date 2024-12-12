@@ -2,15 +2,15 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 require('dotenv').config();
-const RedisStore = require('connect-redis')(session);
-const redis = require('redis');
+const MySQLStore = require('express-mysql-session')(session);
+const connection = require('./config/db')
 
 const app = express();
-const client = redis.createClient();
+const sessionStore = new MySQLStore({}, connection);
 
 // middleware
 app.use(session({
-    store: new RedisStore({ client }),
+    store: sessionStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -20,6 +20,7 @@ app.use(session({
         httpOnly: true
     }
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
