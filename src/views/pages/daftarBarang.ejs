@@ -1,0 +1,112 @@
+<%- include('../partials/header.ejs') -%>
+  <%- include('../partials/nav.ejs') -%>
+
+    <!-- navbar end -->
+    <main class="content px-3 py-2">
+      <div class="container-fluid mt-3">
+        <h1 class="text-center mb-4">Daftar Barang</h1>
+
+
+        <!-- Form Pencarian -->
+        <form class="form-pencarian d-flex flex-column align-items-center gap-3" action="/barang" method="get">
+          <select class="form-select w-50 text-center" name="kategori" id="kategori">
+            <option value="">-- Semua Kategori --</option>
+            <% categories.forEach(category=> { %>
+              <option value="<%= category.kategori_brg %>" <%=filter.kategori_brg===category.kategori_brg ? 'selected'
+                : '' %>>
+                <%= category.kategori_brg %>
+              </option>
+              <% }); %>
+          </select>
+
+          <input class="form-control w-50 text-center" type="text" name="nama" id="nama" placeholder="Cari Nama Barang"
+            value="<%= filter.nama || '' %>">
+
+          <button class="btn btn-primary w-25" type="submit">Cari</button>
+        </form>
+
+        <div class="d-flex align-items-center justify-content-center gap-3 mb-3">
+
+          <button id="btnTransaksi" class="btn btn-success w-30" type="button">Buat Transakasi</button>
+
+          <button id="btnTambahBarang" class="btn btn-warning w-30" type="button" data-bs-toggle="modal"
+            data-bs-target="#formModal">Tambah barang</button>
+
+        </div>
+
+        <!-- alert ejs-->
+        <% if (message) { %>
+          <div class="alert alert-<%= message.type %>">
+            <%= message.message %>
+              <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+          </div>
+          <% } %>
+
+            <!-- alert dom -->
+            <div id="alert"></div>
+
+            <!-- Tabel Barang -->
+            <table class="table table-striped table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Id</th>
+                  <th>Nama Barang</th>
+                  <th>Stok</th>
+                  <th>Harga</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="bg-secondary-subtle">
+                <% if (barang.length> 0) { %>
+                  <% barang.forEach(barang=> { %>
+                    <tr>
+                      <td>
+                        <%= barang.id_brg %>
+                      </td>
+
+                      <td>
+                        <%= barang.nama_brg %>
+                      </td>
+
+                      <td>
+                        <%= barang.jumlah_brg %>
+                      </td>
+
+                      <td>
+                        Rp <%= barang.harga_brg.toLocaleString('id-ID') %>
+                      </td>
+
+                      <td>
+                        <button class="btn btn-primary btn-sm btn-edit" data-id="<%= barang.id_brg %>">
+                          🖉 Edit
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="<%= barang.id_brg %>">
+                          Delete
+                        </button>
+                      </td>
+
+                    </tr>
+                    <% }); %>
+                      <% } else { %>
+                        <tr>
+                          <td colspan="4" style="text-align: center;">Tidak ada barang ditemukan.</td>
+                        </tr>
+                        <% } %>
+              </tbody>
+            </table>
+
+            <%- include('../partials/modalEditBarang.ejs') -%>
+              <%- include('../partials/modalTambahBarang.ejs') -%>
+                <%- include('../partials/modalTransaksi.ejs') -%>
+                  <%- include('../partials/modalDelete.ejs') -%>
+
+                    <a href="#" class="theme-toggle">
+                      <img src="/image/light-mode.svg" alt="" class="avatar night-mode">
+                      <img src="/image/night-mode.svg" alt="" class="avatar light-mode">
+                    </a>
+
+                    <script src="/js/formValidasi.js"></script>
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs') -%>

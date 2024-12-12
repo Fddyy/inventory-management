@@ -1,0 +1,159 @@
+<%- include('../partials/header.ejs') -%>
+  <%- include('../partials/nav.ejs') -%>
+
+    <main class="content px-3 py-2">
+      <div class="container-fluid">
+
+        <!-- alert -->
+        <% if (message) { %>
+          <div class="alert alert-<%= message.type %>">
+            <%= message.text %>
+              <button type="button" class="btn-close position-absolute end-0" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+          </div>
+          <% } %>
+
+            <!-- alert end -->
+
+            <div class="mb-3">
+              <h4>Admin Dashboard</h4>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 d-flex">
+                <div class="card flex-fill border-0 illustration">
+                  <div class="card-body p-0 d-flex flex-fill">
+                    <div class="row g-0 w-100">
+                      <div class="col-6">
+                        <div class="p-3 m-1">
+                          <h4>Hi, <%= getUser[0].username %>!
+                          </h4>
+                          <p class="mb-0">Welcome to your dashboard. Everything is ready to support your activities
+                            today.</p>
+                        </div>
+                      </div>
+                      <div class="col-6 align-self-end text-end">
+                        <img src="/image/profil.svg" class="img-fluid illustration-img" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 d-flex">
+                <div class="card flex-fill border-0">
+                  <div class="card-body py-4">
+                    <div class="d-flex align-items-start">
+                      <div class="flex-grow-1">
+                        <h4 class="mb-2">
+                          <%= jumlahData %>
+                        </h4>
+                        <p class="mb-2">
+                          Total Barang
+                        </p>
+                        <div class="mb-0">
+                          <span class="badge <%= pertumbuhanBarang >= 0 ? 'text-success' : 'text-danger' %> me-2">
+                            <%= pertumbuhanBarang>= 0 ? '+':'-' %><%= pertumbuhanBarang %>%
+                          </span>
+                          <span class="text-muted">
+                            Sejak bulan lalu
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+
+              <div class="col-md-6">
+                <div class="card flex-fill border-0">
+                  <div class="card-body">
+                    <h5>Grafik Penjualan</h5>
+                    <canvas id="myChart1"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="card flex-fill border-0">
+                  <div class="card-body">
+                    <h5>Grafik Barang</h5>
+                    <canvas id="myChart2"></canvas>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Table Element -->
+            <div class="card border-0">
+              <div class="card-header">
+                <h5 class="card-title">
+                  Barang terbaru
+                </h5>
+
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">NAMA</th>
+                      <th scope="col">JUMLAH</th>
+                      <th scope="col">HARGA</th>
+                      <th scope="col">KATEGORI</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if (daftarBarang.length> 0) { %>
+                      <% daftarBarang.forEach(barang=> { %>
+                        <tr>
+
+                          <td>
+                            <%= barang.nama_brg %>
+                          </td>
+
+                          <td>
+                            <%= barang.jumlah_brg %>
+                          </td>
+
+                          <td>Rp <%= barang.harga_brg.toLocaleString('id-ID') %>
+                          </td>
+
+                          <td>
+                            <%= barang.kategori_brg %>
+                          </td>
+
+                        </tr>
+                        <% }); %>
+                          <% } else { %>
+                            <tr>
+                              <td colspan="4" style="text-align: center;">Tidak ada barang ditemukan.</td>
+                            </tr>
+                            <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+      </div>
+    </main>
+
+
+    <a href="#" class="theme-toggle">
+      <img src="/image/light-mode.svg" alt="" class="avatar night-mode">
+      <img src="/image/night-mode.svg" alt="" class="avatar light-mode">
+    </a>
+
+
+    </div>
+    </div>
+
+    <!-- Render data chart -->
+    <div id="chartData1" data-chart="<%= JSON.stringify(chartData1) %>"></div>
+    <div id="chartData2" data-chart="<%= JSON.stringify(chartData2) %>"></div>
+    <script src="/js/chart.umd.js"></script>
+    <script src="/js/dashboardChart.js"></script>
+
+    <%- include('../partials/footer.ejs') -%>

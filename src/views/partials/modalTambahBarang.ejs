@@ -1,0 +1,65 @@
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="formModalLabel">Form Tambah Barang</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation card-body" action="/barang/tambah" method="POST" novalidate>
+
+          <div class="col-md-4">
+            <label for="nama" class="form-label">Nama Barang</label>
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama barang" required>
+            <div class="valid-feedback">Nama barang valid.</div>
+            <div class="invalid-feedback">Nama barang tidak boleh kosong.</div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="jumlah" class="form-label">Jumlah Barang</label>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Masukkan jumlah barang"
+              min="1" required>
+            <div class="valid-feedback">Jumlah barang valid.</div>
+            <div class="invalid-feedback">Jumlah barang harus berupa angka dan lebih dari 0.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="harga" class="form-label">Harga Barang</label>
+            <input type="text" class="form-control" id="formatIdr" name="harga" placeholder="Masukkan harga barang"
+              min="0" required>
+            <div class="valid-feedback">Harga barang valid.</div>
+            <div class="invalid-feedback">Harga barang harus berupa angka dan tidak boleh kosong.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="status" class="form-label">Status Barang</label>
+            <input type="text" class="form-control" id="status" name="status" placeholder="Status barang..">
+            <div class="valid-feedback">Status barang opsional.</div>
+            <div class="invalid-feedback">Status barang tidak valid</div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="kategori" class="form-label">Kategori</label>
+            <select class="form-select" id="kategori" name="kategori" required>
+              <option selected disabled value="">Pilih kategori...</option>
+              <option>Parabot</option>
+              <option>Kosmetik</option>
+              <option>Aksesoris</option>
+            </select>
+            <div class="valid-feedback">Kategori valid.</div>
+            <div class="invalid-feedback">Silakan pilih kategori.</div>
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-warning" type="submit">Tambah Barang</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+<!-- card end -->

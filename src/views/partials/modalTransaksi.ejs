@@ -1,0 +1,30 @@
+<div class="modal fade" id="transaksiModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="formModalLabel">Form Transaksi Barang</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form Transaksi -->
+        <form id="formTransaksi">
+          <div id="itemsContainer">
+            <!-- Daftar barang akan di-render di sini -->
+          </div>
+          <button type="button" class="btn btn-primary btn-sm mb-3" id="tambahBarangBtn">
+            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M2 7a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm0 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm1 4a1 1 0 1 0 0 2h9a1 1 0 1 0 0-2H3zm12 1a1 1 0 0 1 1-1h2v-2a1 1 0 1 1 2 0v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0v-2h-2a1 1 0 0 1-1-1z"
+                fill="#eaeaea" />
+            </svg>
+          </button>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success btn-lg" id="prosesTransaksi">Proses Transaksi</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/formTransaksi.js"></script>
