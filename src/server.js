@@ -4,9 +4,14 @@ const session = require('express-session');
 require('dotenv').config();
 const MySQLStore = require('express-mysql-session')(session);
 const connection = require('./config/db')
+const cors = require('cors')
 
 const app = express();
 const sessionStore = new MySQLStore({}, connection);
+const corsOptions = {
+    origin: 'https://inventory-management-delta-pink.vercel.app/',
+    credentials: true,
+  };
 
 // middleware
 app.use(session({
@@ -17,7 +22,7 @@ app.use(session({
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
         secure: true,
-        httpOnly: true
+        httpOnly: true,
     }
 }));
 
