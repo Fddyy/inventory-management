@@ -6,7 +6,7 @@ const userLogin = require('../controllers/loginController');
 Router.get('/login',(req, res) => {
     const message = req.session.message;
     req.session.message = null;
-    res.render('pages/login',{message,title:"Login"});
+    res.render('pages/Login.ejs',{message,title:"Login"});
 });
 
 // Rute untuk autentikasi login
