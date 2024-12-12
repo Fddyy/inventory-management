@@ -2,17 +2,21 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 require('dotenv').config();
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
 
 const app = express();
+const client = redis.createClient();
 
 // middleware
 app.use(session({
+    store: new RedisStore({ client }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
-        secure: false,
+        secure: true,
         httpOnly: true
     }
 }));
