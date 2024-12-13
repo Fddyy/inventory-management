@@ -9,7 +9,7 @@ const cors = require('cors')
 const app = express();
 const sessionStore = new MySQLStore({}, connection);
 const corsOptions = {
-    origin: 'https://inventory-management-delta-pink.vercel.app/',
+    origin: 'https://inventory-management-two-teal.vercel.app',
     credentials: true,
   };
 
