@@ -30,7 +30,7 @@ app.use(session({
         domain: 'https://inventory-management-two-teal.vercel.app',
         path: '/',
         maxAge: 24 * 60 * 60 * 1000,
-        secure: false,
+        secure: true,
         sameSite: 'None',
         httpOnly: true,
     }
