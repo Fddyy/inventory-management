@@ -14,6 +14,13 @@ const corsOptions = {
   };
 
 // middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+app.set('views',path.resolve('src/views'));
+app.use(cors(corsOptions))
+
 app.use(session({
     store: sessionStore,
     secret: process.env.SESSION_SECRET,
@@ -21,17 +28,16 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
-        secure: true,
+        secure: false,
         httpOnly: true,
     }
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('view engine', 'ejs');
-app.set('views',path.resolve('src/views'));
-app.use(cors(corsOptions))
+app.use((req, res, next) => {
+    console.log('Cookies diterima:', req.cookies); // Pastikan connect.sid ada
+    console.log('Session di server:', req.session); // Pastikan session terisi
+    next();
+});
 
 // Routes
 const homeRoute = require('./routes/indexRoute');

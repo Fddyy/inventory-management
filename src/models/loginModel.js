@@ -17,10 +17,10 @@ const cekUser = async (email, password) => {
         // Verifikasi password dengan hash yang tersimpan
         const match = await bcrypt.compare(password, emailUser.password);
         if (match) {
-            console.log("Login berhasil!");
+            console.log("User verified!!");
             return true;
         } else {
-            console.log("Password salah.");
+            console.log("Invalid user!!.");
             return false;
         }
     } catch (error) {
