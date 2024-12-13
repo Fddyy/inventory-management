@@ -30,12 +30,12 @@ app.use((req, res, next) => {
 
 
 app.use(session({
+    key: 'connect.sid',
     store: sessionStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        domain: 'inventory-management-two-teal.vercel.app',
         path: '/',
         maxAge: 24 * 60 * 60 * 1000,
         secure: true,
