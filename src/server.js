@@ -5,6 +5,7 @@ require('dotenv').config();
 const MySQLStore = require('express-mysql-session')(session);
 const connection = require('./config/db')
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const sessionStore = new MySQLStore({}, connection);
@@ -13,6 +14,7 @@ const corsOptions = {
     credentials: true,
   };
 
+
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views',path.resolve('src/views'));
 app.use(cors(corsOptions))
+app.use(cookieParser());
+app.use((req, res, next) => {
+    console.log('Cookies diterima:', req.cookies); // Membaca semua cookie
+    next();
+});
+
 
 app.use(session({
     store: sessionStore,
@@ -27,7 +35,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        domain: 'https://inventory-management-two-teal.vercel.app',
+        domain: 'inventory-management-two-teal.vercel.app',
         path: '/',
         maxAge: 24 * 60 * 60 * 1000,
         secure: true,
