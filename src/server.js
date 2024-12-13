@@ -27,8 +27,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
+        domain: 'https://inventory-management-two-teal.vercel.app',
+        path: '/',
         maxAge: 24 * 60 * 60 * 1000,
-        secure: true,
+        secure: false,
+        sameSite: 'None',
         httpOnly: true,
     }
 }));
